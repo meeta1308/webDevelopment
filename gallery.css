@@ -1,0 +1,261 @@
+/* ========== RESET & BASE STYLES ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* ========== LOADING ANIMATION ========== */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #222 0%, #000 100%);
+  z-index: 9999;
+  animation: fadeOut 1.5s ease forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ========== HEADER ========== */
+header {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #222;
+  color: #fff;
+}
+
+header h1 {
+  margin-bottom: 10px;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: 1px;
+}
+
+/* ========== NAVIGATION ========== */
+nav {
+  animation: navFadeIn 1.5s ease;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 10px 0;
+}
+
+nav ul li a {
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  background-color: transparent;
+  border: 2px solid transparent;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover underline animation */
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 2px;
+  background-color: #fff;
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* Hover and active glow effect */
+nav ul li a:hover,
+nav ul li a.active {
+  color: #ffcc00;
+  transform: scale(1.05);
+  border-color: #ffcc00;
+  box-shadow: 0 0 10px #ffcc00;
+}
+
+/* Active underline stays */
+nav ul li a.active::after {
+  width: 100%;
+  background-color: #ffcc00;
+}
+
+/* Navbar entrance animation */
+@keyframes navFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== GALLERY GRID ========== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ========== GALLERY ITEM ========== */
+.gallery-item {
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.gallery-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== IMAGE STYLING ========== */
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-item:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== RESPONSIVE TWEAKS ========== */
+@media (max-width: 600px) {
+  nav ul {
+    gap: 10px;
+  }
+
+  nav ul li a {
+    padding: 6px 12px;
+  }
+
+  .gallery {
+    padding: 15px;
+  }
+}
+
+/* ========== INTRO SCREEN ========== */
+.intro-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #222, #000);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeOutIntro 3s ease forwards;
+  animation-delay: 2.5s;
+}
+
+.intro-content {
+  text-align: center;
+  animation: zoomIn 1.5s ease;
+}
+
+.intro-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  animation: slideUp 1s ease;
+}
+
+.intro-content p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  animation: fadeIn 2s ease;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes fadeOutIntro {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+  }
+}
